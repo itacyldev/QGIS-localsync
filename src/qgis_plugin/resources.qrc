@@ -1,0 +1,9 @@
+<RCC>
+    <qresource>
+		<file>resources/new-up.png</file>
+		<file>resources/new-down.png</file>
+		<file>resources/gears.png</file>
+		<file>resources/carto-folder.png</file>
+		<file>resources/carto-folder-update.png</file>
+    </qresource>
+</RCC>

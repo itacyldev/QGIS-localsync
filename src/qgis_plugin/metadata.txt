@@ -1,0 +1,66 @@
+# This file contains metadata for your plugin.
+
+# Mandatory items:
+
+[general]
+name=CartoDruid Device Sync
+qgisMinimumVersion=3.28
+description=Synchronize projects between CartoDruid and QGIS. Configurable for other device files.
+version=0.3
+author=ITACYL
+email=palferfr@itacyl.es
+
+about=
+    CartoDruid Device Sync is a <b>QGIS plugin</b> designed to synchronize files between a <b>PC</b> and one or more <b>mobile devices</b>.
+    It enables fast and efficient data exchange between <b>QGIS projects</b> and the fieldwork tool <b>CartoDruid, without relying on cloud services</b>.
+
+    Although focused on <b>CartoDruid projects</b>, the plugin is <b>data-agnostic</b> and can be used to synchronize any folder structure between a mobile device and a PC.
+    For the time being, the plugin is fully functional on Windows and partially functional on Linux (Only ADB protocol works on Linux).
+
+    Communication is performed via:
+    - <b>ADB (Android Debug Bridge)</b> as the primary transport protocol (currently via cable only).
+    - <b>MTP (Media Transfer Protocol)</b> as a fallback when ADB is not available.
+
+    Key features:
+    - <b>Automatic detection of CartoDruid projects:</b> scans device folders to locate projects and generate synchronization settings.
+    - <b>Project configuration synchronization:</b> copies and updates CartoDruid project configuration files.
+    - <b>Vector data synchronization:</b> synchronizes vector layers and adds them automatically to the QGIS Table of Contents (<b>TOC</b>).
+    - <b>Georeferenced image synchronization:</b> copies images from the device and incorporates them as geo-tagged photo layers.
+    - <b>Generic folder synchronization:</b> can synchronize any folder between the device and PC, beyond CartoDruid-specific data.
+    This plugin enables teams to synchronize field data locally, without relying on cloud services.
+
+    External dependencies: The plugin uses the ADB binary. You can download and install the binary using a button in the plugin configuration. Further information can be found in the documentation in the readme or at <a href="https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/">https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/</a>.
+
+tracker=http://bugs
+repository=https://github.com/itacyldev/QGIS-localsync
+# End of mandatory metadata
+
+# Recommended items:
+
+hasProcessingProvider=no
+# Uncomment the following line and add your changelog:
+# changelog=
+
+# Tags are comma separated with spaces allowed
+tags=python, cartodruid, cartodroid, mobile, device, synchronization,
+
+homepage=https://github.com/itacyldev/QGIS-localsync
+category=Plugins
+icon=icon.png
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
+# Since QGIS 3.8, a comma separated list of plugins to be installed
+# (or upgraded) can be specified.
+# Check the documentation for more information.
+# plugin_dependencies=
+
+Category of the plugin: Raster, Vector, Database or Web
+# category=
+
+# If the plugin can run on QGIS Server.
+server=False
+

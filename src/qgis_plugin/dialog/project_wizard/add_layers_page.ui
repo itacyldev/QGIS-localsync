@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WizardPage</class>
+ <widget class="QWizardPage" name="WizardPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WizardPage</string>
+  </property>
+  <property name="title">
+   <string>Add layers</string>
+  </property>
+  <property name="subTitle">
+   <string>Select what layers you would like to add to the current project automatically:</string>
+  </property>
+  <attribute name="pageId">
+   <string notr="true">2</string>
+  </attribute>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Layers already in the table of contents will not be readded.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="tree_layers">
+     <property name="columnCount">
+      <number>1</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>File and layers names</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
