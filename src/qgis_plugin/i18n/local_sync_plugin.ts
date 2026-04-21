@@ -269,22 +269,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="216"/>
+        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="219"/>
         <source>Configuration not created</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="192"/>
+        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="195"/>
         <source>No data selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="192"/>
+        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="195"/>
         <source>Need to select what data files you want to copy from the list to continue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="216"/>
+        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="219"/>
         <source>An active project must exist to be able to create the configuration. Open a project or create a new one to complete this step.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -299,22 +299,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="141"/>
+        <location filename="../dialog/project_wizard/wizard_pages/file_selector.py" line="144"/>
         <source>Read CartoDruid configuration finished.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="321"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="327"/>
         <source>The Photo layers configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed. Check if there are duplicates, this configuration does not allow to duplicate values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="333"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="339"/>
         <source>The Photo layers configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="361"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="367"/>
         <source>The Synchronization configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,7 +326,7 @@ This will open the project configuration menu, so you can select what do you wan
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configuration/photo_layers_configuration.py" line="359"/>
+        <location filename="../configuration/photo_layers_configuration.py" line="368"/>
         <source>The Photo layers created by the plugin can&apos;t have the same name.The layer name will be changed to a new one available.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -371,6 +371,16 @@ This will open the project configuration menu, so you can select what do you wan
     <message>
         <location filename="../ui_controllers/devices_combo.py" line="140"/>
         <source>Make sure your phone is properly connected to your computer and the &lt;b&gt;ADB debuggin mode&lt;/b&gt; is On. See this for more information:&lt;br&gt;{link}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tasks/download_task.py" line="78"/>
+        <source>SSL certificate error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tasks/download_task.py" line="76"/>
+        <source>SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually. More information at:{path}</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -494,7 +504,7 @@ The following layers are in edit mode:</source>
     </message>
     <message>
         <location filename="../dialog/project_wizard/photo_layer_page.ui" line="20"/>
-        <source>Select image folders from your device, a layer of georeferenced images will be created in QGIS for each one</source>
+        <source>Select image folders from your device, a layer of georeferenced images will be created in QGIS for each one.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

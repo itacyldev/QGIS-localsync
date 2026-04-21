@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 from PyQt5.QtWidgets import QMessageBox
 
 from qgis._core import QgsProject, QgsApplication
+from ..configuration.xml_reader import XMLReader
 from ..constants import QGIS_SCOPE_NAME, QGIS_PROJECT_CONFIG_KEY, QGIS_PLUGIN_NAME, CARTODRUID_CONFIG_NAME
 from ..dialog.project_wizard.project_wizard_data import ProjectWizardData
 from ..i18n import tr
@@ -103,8 +104,7 @@ class ProjectConfigurationChanged:
         """
         if self.s_task:
             self.logger.info("Comparing configurations...")
-            tree = ET.parse((Path(self.carto_conf_pc_dir) / CARTODRUID_CONFIG_NAME).as_posix())
-            root = tree.getroot()
+            root = XMLReader.safe_parse_xml((Path(self.carto_conf_pc_dir) / CARTODRUID_CONFIG_NAME).as_posix(), self.logger)
             not_found = False
             files_not_found = []
             for source in root.iter("es.jcyl.ita.crtcyl.client.dao.source.SpatiaLiteServiceDescriptor"):

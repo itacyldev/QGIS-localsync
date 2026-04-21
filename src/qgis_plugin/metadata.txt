@@ -31,7 +31,7 @@ about=
 
     External dependencies: The plugin uses the ADB binary. You can download and install the binary using a button in the plugin configuration. Further information can be found in the documentation in the readme or at <a href="https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/">https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/</a>.
 
-tracker=http://bugs
+tracker=https://github.com/itacyldev/QGIS-localsync/issues
 repository=https://github.com/itacyldev/QGIS-localsync
 # End of mandatory metadata
 

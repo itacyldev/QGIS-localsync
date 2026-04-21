@@ -2,6 +2,7 @@ import json
 import os
 import traceback
 from pathlib import Path
+from xml.etree.ElementTree import Element
 
 from PyQt5.QtCore import QItemSelectionModel
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
@@ -10,6 +11,7 @@ import xml.etree.ElementTree as ET
 
 from qgis.PyQt.Qt import Qt
 from qgis._core import QgsApplication, Qgis, QgsProject
+from ....configuration.xml_reader import XMLReader
 from ....constants import QGIS_PLUGIN_NAME, CARTODRUID_CONFIG_NAME, QGIS_SCOPE_NAME, QGIS_CONFIG_KEY, \
     QGIS_PROJECT_CONFIG_KEY
 from ....i18n import tr
@@ -124,8 +126,7 @@ class FileSelector(QWizardPage):
         if self.s_task:
             self.data_list_full = []
             model = QStandardItemModel()
-            tree = ET.parse((Path(self.carto_conf_pc_dir)/CARTODRUID_CONFIG_NAME).as_posix())
-            root = tree.getroot()
+            root = XMLReader.safe_parse_xml((Path(self.carto_conf_pc_dir)/CARTODRUID_CONFIG_NAME).as_posix(), self.wizard().logger)
             for source in root.iter("es.jcyl.ita.crtcyl.client.dao.source.SpatiaLiteServiceDescriptor"):
                 dburl = source.find("dbURL")
                 if dburl is not None and dburl.text not in self.data_list_full:

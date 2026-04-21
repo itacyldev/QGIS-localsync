@@ -502,7 +502,7 @@ class AdbChannel:
         if AdbChannel._adb_path:
             device_id_to_use = device_id if device_id else AdbChannel._selected_device_id
             cmd = [AdbChannel._adb_path, "-s", device_id_to_use, "shell",  "dumpsys activity"]
-            result = subprocess.run(cmd, text=True, capture_output=True, shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            result = subprocess.run(cmd, text=True, capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
             match = re.search(r"mCurrentUser=(\d+)", result.stdout)
             current_user = match.group(1) if match else None
             return current_user

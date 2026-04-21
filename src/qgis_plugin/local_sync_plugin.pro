@@ -22,6 +22,7 @@ SOURCES += \
     tasks/read_devices.py \
     tasks/search_projects.py \
     tasks/read_config_file_carto.py \
+    tasks/download_task.py \
     tasks/load_files.py \
     ui_controllers/devices_combo.py \
     dialog/localsync_conf_panel.py \

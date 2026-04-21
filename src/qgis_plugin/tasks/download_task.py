@@ -1,9 +1,13 @@
 import logging
 
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QMessageBox
+
 from qgis.core import QgsTask, QgsApplication
 import requests
 
 from ..constants import QGIS_PLUGIN_NAME
+from ..i18n import tr
 from ..logger.qgis_logger_handler import QgisLoggerHandler
 
 
@@ -16,6 +20,7 @@ class DownloadTask(QgsTask):
         :ivar result: True if there is a result, False otherwise.
         :vartype result: bool
     """
+    ssl_error = pyqtSignal(str, str)
 
 
 
@@ -41,7 +46,7 @@ class DownloadTask(QgsTask):
         """
         try:
             self.logger.info("Sending download request...")
-            response = requests.get(self.url, stream=True, verify=False) # noqa: S4830
+            response = requests.get(self.url, stream=True)
             self.logger.info("Response received.")
             total_size = int(response.headers.get('content-length', 0))
             downloaded = 0
@@ -62,7 +67,13 @@ class DownloadTask(QgsTask):
             self.result = True
             self.logger.info("Download completed.")
             return True
-
+        except requests.exceptions.SSLError as e:
+            error="SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually."
+            translate_error = tr("SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually. More information at:{path}").format(path = "<a href = 'https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/'>https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/</a>")
+            self.logger.error(error)
+            self.ssl_error.emit(error, translate_error)
+            self.result = False
+            raise RuntimeError(error) from e
         except Exception as e:
             self.logger.error("An error happened: " + str(e))
             self.exception = e

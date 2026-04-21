@@ -378,6 +378,16 @@ Esto abrirá el menú de configuración del proyecto para que puedas seleccionar
         <source>Make sure your phone is properly connected to your computer and the &lt;b&gt;ADB debuggin mode&lt;/b&gt; is On. See this for more information:&lt;br&gt;{link}</source>
         <translation>Asegúrate de que tu teléfono está correctamente conectado al ordenador y el &lt;b&gt;modo de depuración ADB&lt;/b&gt; está activado. Más información en:&lt;br&gt;{link}</translation>
     </message>
+    <message>
+        <location filename="../tasks/download_task.py" line="78"/>
+        <source>SSL certificate error.</source>
+        <translation>Error de certificado SSL.</translation>
+    </message>
+    <message>
+        <location filename="../tasks/download_task.py" line="76"/>
+        <source>SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually. More information at:{path}</source>
+        <translation>La verificación del certificado SSL ha fallado. Si estás conectado a través de un proxy corporativo, tendrás que descargar y configurar adb manualmente. Más información en: {path}</translation>
+    </message>
 </context>
 <context>
     <name>CartoDruid_Device_Sync</name>
