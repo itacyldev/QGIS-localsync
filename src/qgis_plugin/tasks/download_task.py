@@ -46,7 +46,7 @@ class DownloadTask(QgsTask):
         """
         try:
             self.logger.info("Sending download request...")
-            response = requests.get(self.url, stream=True)
+            response = requests.get(self.url, stream=True, timeout=5)
             self.logger.info("Response received.")
             total_size = int(response.headers.get('content-length', 0))
             downloaded = 0
