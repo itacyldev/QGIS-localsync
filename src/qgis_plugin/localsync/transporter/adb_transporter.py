@@ -192,8 +192,10 @@ class AdbTransporter(Transporter):
                 file_list = AdbChannel.get_directories_list(input_path)
             else:
                 file_list = AdbChannel.get_file_list(input_path)
+            print(file_list)
             file_list = FileScanner.filter_files_list(file_list, includes_filters, True)
             file_list = FileScanner.filter_files_list(file_list, excludes_filters, False)
+            print(file_list)
         return file_list
 
 

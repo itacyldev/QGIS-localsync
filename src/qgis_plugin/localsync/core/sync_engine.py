@@ -149,7 +149,7 @@ class SyncEngine:
             return False
 
 
-    def recreate_device_structure(self, device: DeviceManager, host: HostManager) -> bool:
+    def recreate_device_structure(self, device: DeviceManager, host: HostManager, includes: list, excludes: list) -> bool:
         """
             Tries to recreate the folder structure on the given device and path_to_project in the host.
             :param device: connected device where the folder structure will be consulted.
@@ -164,7 +164,7 @@ class SyncEngine:
             device.path_to_project = device_path.as_posix()
             host_path = Path(host.path)
             host.path = host_path.as_posix()
-            folders_list = self.list_files(True,device.path_to_project,[],[],device,
+            folders_list = self.list_files(True,device.path_to_project,includes,excludes,device,
                                            True)
             for folder in folders_list:
                 new_path = host_path / folder.relative_to(device_path)

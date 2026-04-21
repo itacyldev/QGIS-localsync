@@ -14,6 +14,7 @@ from ....constants import QGIS_PLUGIN_NAME, CARTODRUID_CONFIG_NAME, QGIS_SCOPE_N
     QGIS_PROJECT_CONFIG_KEY
 from ....i18n import tr
 from ....localsync.project.sync_mapper_reader import SyncMapperData
+from ....tasks.copy_folders_from_device import CopyFoldersFromDevice
 from ....tasks.load_files import LoadFiles
 from ....tasks.read_config_file_carto import ReadConfigFileCarto
 
@@ -56,6 +57,7 @@ class FileSelector(QWizardPage):
         self.data_box.stateChanged.connect(self.change_data_view_state)
         self.s_task = None
         self.d_task = None
+        self.c_task = None
         self.carto_conf_pc_dir = ""
         self.data_view.setEnabled(False)
         self._download_process_finished = False
@@ -210,7 +212,7 @@ class FileSelector(QWizardPage):
                 json = new_sync_data.to_dict()
                 self.wizard().c_manager.save_config([json])
                 self.wizard().logger.info("New configuration created!")
-                self.launch_first_download_process()
+                self.launch_first_copy_process()
                 return False
             else:
                 QMessageBox.critical(self.wizard(), tr("Configuration not created"),
@@ -227,6 +229,30 @@ class FileSelector(QWizardPage):
         self.data_box.setEnabled(enable)
         self.data_box.setEnabled(enable)
 
+
+    def launch_first_copy_process(self):
+        if not self.c_task:
+            transformed_config = self.wizard().c_manager.convert_config_relative_path_to_absolute(self.wizard().c_manager.config)
+            self.c_task = CopyFoldersFromDevice(self.wizard().s_eng, transformed_config, self.wizard().device, self.wizard().s_listener)
+            self.set_enable_interactuables(False)
+            self.c_task.taskCompleted.connect(self._copy_directories_completed)
+            self.c_task.taskTerminated.connect(self._copy_directories_finished)
+            self.wizard().logger.info("Starting project copy.")
+            self.wizard().progress2.show()
+            QgsApplication.taskManager().addTask(self.c_task)
+
+    def _copy_directories_finished(self):
+        self.wizard().logger.error("There was an error copying the directories or it was terminated by the user.")
+        self.c_task = None
+        self.wizard().progress2.hide()
+        self.set_enable_interactuables(True)
+
+    def _copy_directories_completed(self):
+        self.wizard().logger.info("Project copy ended.")
+        self.c_task = None
+        self.wizard().progress2.hide()
+        self._download_process_finished = True
+        self.launch_first_download_process()
 
     def launch_first_download_process(self):
         if not self.d_task:

@@ -486,7 +486,7 @@ class AdbChannel:
         """
         if AdbChannel._adb_path:
             device_id_to_use = device_id if device_id else AdbChannel._selected_device_id
-            cmd = [AdbChannel._adb_path, "-s", device_id_to_use, "shell", "ls", path]
+            cmd = [AdbChannel._adb_path, "-s", device_id_to_use, "shell", f"ls '{path}'"]
             return subprocess.check_output(cmd, text=True, creationflags=subprocess.CREATE_NO_WINDOW)
         else:
             return ""
@@ -526,8 +526,7 @@ class AdbChannel:
 
 
                 logger.info("Creating directory {directory}".format(directory = directory_path))
-                cmd = [AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", "mkdir",
-                       "-p", f"{directory_path}"]
+                cmd = [AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", f"mkdir -p '{directory_path}'"]
                 subprocess.check_output(cmd, text=True, creationflags=subprocess.CREATE_NO_WINDOW)
                 return True
             return False
@@ -544,8 +543,8 @@ class AdbChannel:
             :return: bool to know if the directory exists. True exists, False not exists.
         """
         if AdbChannel._adb_path:
-            return subprocess.run([AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", "test", "-d" ,
-                               f"{directory_path}","&& echo 0 || echo 1"],
+            cmd = [AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", f"test -d '{directory_path}' && echo 0 || echo 1"]
+            return subprocess.run(cmd,
                               capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW).stdout.strip() == "0"
         else:
             raise FileNotFoundError("ADB binary not found.")
@@ -559,8 +558,7 @@ class AdbChannel:
             :return: Bool to know if the directory exists. True exists, False not exists.
         """
         if AdbChannel._adb_path:
-            return subprocess.run([AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", "test", "-e" ,
-                               f"{file_path}","&& echo 0 || echo 1"],
+            return subprocess.run([AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", f"test -e '{file_path}' && echo 0 || echo 1"],
                               capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW).stdout.strip() == "0"
         else:
             raise FileNotFoundError("ADB binary not found.")
@@ -594,7 +592,7 @@ class AdbChannel:
 
         if AdbChannel._adb_path:
             files_paths = ""
-            cmd = [AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", "find", input_path, "-type f"]
+            cmd = [AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", f"find '{input_path}' -type f"]
             try:
                 files_paths = subprocess.run(cmd, text=True, capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW).stdout
             except subprocess.CalledProcessError as e:
@@ -615,7 +613,7 @@ class AdbChannel:
         """
         if AdbChannel._adb_path:
             directories_paths = ""
-            cmd = [AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", "find", path, "-type", "d"]
+            cmd = [AdbChannel._adb_path, "-s", AdbChannel._selected_device_id, "shell", f"find '{path}' -type d"]
             try:
                 directories_paths = subprocess.run(cmd, text=True, capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW).stdout
             except subprocess.CalledProcessError as e:

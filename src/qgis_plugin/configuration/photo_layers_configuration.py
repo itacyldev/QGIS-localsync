@@ -245,7 +245,6 @@ class PhotoLayersConfiguration:
         with the layers created/updated.
         """
         if self.config:
-            photo_group = self.get_photo_group()
             pictures_folder = os.path.join(
                 Path(QgsProject.instance().absolutePath()).as_posix(),
                 "cartodruid",
@@ -253,7 +252,7 @@ class PhotoLayersConfiguration:
             )
             for folder_name in self.config:
                 folder = os.path.join(pictures_folder, folder_name)
-                layer = self._create_or_modify_photo_layer(folder, self.config[folder_name], photo_group)
+                layer = self._create_or_modify_photo_layer(folder, self.config[folder_name])
                 if self.save_layers_in_gkpg and layer:
                     self._create_or_modify_gkpg_file_and_use_on_toc(folder, folder_name, layer)
             for key, value in self.config_ids.items():
@@ -262,6 +261,16 @@ class PhotoLayersConfiguration:
                     del self.config[key]
 
 
+
+    def delete_photo_group_if_empty(self, photo_group:QgsLayerTreeGroup):
+        if len(photo_group.children()) == 0:
+            parent = photo_group.parent()
+            if parent:
+                parent.removeChildNode(photo_group)
+                if len(parent.children()) == 0:
+                    root = parent.parent()
+                    if root:
+                        root.removeChildNode(parent)
 
 
     def _create_or_modify_gkpg_file_and_use_on_toc(self, folder:str, folder_name:str, layer:QgsVectorLayer):
@@ -376,7 +385,7 @@ class PhotoLayersConfiguration:
 
 
 
-    def _create_or_modify_photo_layer(self, folder:str, layer_name:str, photo_group:QgsLayerTreeGroup) -> QgsVectorLayer:
+    def _create_or_modify_photo_layer(self, folder:str, layer_name:str) -> QgsVectorLayer:
         """
             Create a new temporal photo layer using the importphotos process. Changes the layer created to add the necessary options
             to be the same as if the user used the process from the QGIS GUI.
@@ -385,7 +394,9 @@ class PhotoLayersConfiguration:
             :param photo_group: QgsLayerTreeGroup containing the new layer created.
             :return: The layer created or found. None if it was not created of found.
         """
-        if Path(folder).exists():
+        path_folder = Path(folder)
+        if path_folder.exists() and path_folder.is_dir() and any(path_folder.iterdir()):
+            photo_group = self.get_photo_group()
             new_photo_layer = processing.run("native:importphotos",
                                              {'FOLDER': folder,
                                               'RECURSIVE': False, 'OUTPUT': 'TEMPORARY_OUTPUT'})
@@ -407,7 +418,7 @@ class PhotoLayersConfiguration:
             self.add_to_config_ids(layer)
             return layer
         else:
-            self.logger.info("The folder with the name " + Path(folder).name + " could not be found, so no photo layer"
+            self.logger.info("The folder with the name " + Path(folder).name + " could not be found or was empty, so no photo layer"
                                                                                " was created.")
         return None
 
@@ -417,7 +428,7 @@ class PhotoLayersConfiguration:
         Change the values in an old layer with the values found in the new one.
         :param old_layer: Layer that will be changed.
         :param new_layer: Layer from whom the values will be read
-        :return: The old layer with the new values..
+        :return: The old layer with the new values.
         """
         old_layer.startEditing()
         old_layer.dataProvider().truncate()

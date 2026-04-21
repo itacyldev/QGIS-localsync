@@ -47,6 +47,21 @@ class CopyFoldersFromDevice(QgsTask):
             level=logging.INFO
         ).get_logger()
         self.canceled = False
+        self.key_filter_word = ["pictures", "values", "config", "data"]
+
+
+
+    def convert_filters(self, mapper: SyncMapperData) -> SyncMapperData:
+        new_includes = []
+        for item in self.key_filter_word:
+            for map in mapper.includes:
+                if item in map:
+                    if item == "pictures":
+                        new_includes.append("*/"+item+"/*")
+                    new_includes.append("*/"+item)
+        mapper.includes = new_includes
+        return mapper
+
 
 
     def run(self):
@@ -60,9 +75,10 @@ class CopyFoldersFromDevice(QgsTask):
             for config in self.config:
                 mapper = SyncMapperData(config["source"], config["destination"],
                                         config["includes"], config["excludes"])
+                mapper = self.convert_filters(mapper)
                 host = HostManager("", mapper.source)
                 self.device.path_to_project = config["destination"]
-                accumulated_result = accumulated_result and self.s_eng.recreate_device_structure(self.device, host)
+                accumulated_result = accumulated_result and self.s_eng.recreate_device_structure(self.device, host, mapper.includes, mapper.excludes)
             self.result = accumulated_result
             return accumulated_result
         except Exception as e:

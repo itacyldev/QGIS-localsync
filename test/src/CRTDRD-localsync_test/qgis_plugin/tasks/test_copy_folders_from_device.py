@@ -17,6 +17,7 @@ class TestCopyFoldersFromDevice(unittest.TestCase):
         task.result = False
         task.canceled = False
         task.logger = MagicMock()
+        task.key_filter_word = ["pictures", "values"]
         return task
 
     def test_run_happy_path(self):
