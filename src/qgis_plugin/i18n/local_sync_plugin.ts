@@ -219,7 +219,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/messages_dialog.py" line="82"/>
+        <location filename="../dialog/messages_dialog.py" line="60"/>
         <source>Messages copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -304,17 +304,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="327"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="322"/>
         <source>The Photo layers configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed. Check if there are duplicates, this configuration does not allow to duplicate values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="339"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="334"/>
         <source>The Photo layers configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="367"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="362"/>
         <source>The Synchronization configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,7 +326,7 @@ This will open the project configuration menu, so you can select what do you wan
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configuration/photo_layers_configuration.py" line="368"/>
+        <location filename="../configuration/photo_layers_configuration.py" line="374"/>
         <source>The Photo layers created by the plugin can&apos;t have the same name.The layer name will be changed to a new one available.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,13 +374,13 @@ This will open the project configuration menu, so you can select what do you wan
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tasks/download_task.py" line="78"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="230"/>
         <source>SSL certificate error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tasks/download_task.py" line="76"/>
-        <source>SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually. More information at:{path}</source>
+        <location filename="../tasks/download_task.py" line="55"/>
+        <source>SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually.&lt;br&gt; Download the file from:&lt;br&gt;{link}&lt;br&gt;&lt;br&gt; Unzip it and copy the contents to:&lt;br&gt;{path}.&lt;br&gt;&lt;br&gt;You will have to configure the adb binary path with the adb binary found inside the zip in the plugin configuration window.&lt;br&gt;If you copied and unziped the file in the correct path, closing and opening again QGIS will do the configuration automatically.&lt;br&gt;More information at: {carto_link}</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

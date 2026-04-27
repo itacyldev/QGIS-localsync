@@ -1,4 +1,7 @@
 import logging
+import os
+import platform
+from pathlib import Path
 
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox
@@ -6,7 +9,7 @@ from PyQt5.QtWidgets import QMessageBox
 from qgis.core import QgsTask, QgsApplication
 import requests
 
-from ..constants import QGIS_PLUGIN_NAME
+from ..constants import QGIS_PLUGIN_NAME, WINDOWS_ADB_DOWNLOAD_URL, LINUX_ADB_DOWNLOAD_URL
 from ..i18n import tr
 from ..logger.qgis_logger_handler import QgisLoggerHandler
 
@@ -40,6 +43,23 @@ class DownloadTask(QgsTask):
         self.exception = None
         self.result = False
 
+
+    def ssl_error_response(self):
+        op_sys = platform.system()
+        link = WINDOWS_ADB_DOWNLOAD_URL
+        path = Path(self.output_path).parent.as_posix()
+        carto_link = "https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/"
+        if op_sys == "Linux":
+            link = LINUX_ADB_DOWNLOAD_URL
+        error = "SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually."
+        translate_error = tr("SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually.<br> Download the file from:<br>{link}<br><br> Unzip it and copy the contents to:<br>{path}.<br><br>You will have to configure the adb binary path with the adb binary found inside the zip in the plugin configuration window.<br>If you copied and unziped the file in the correct path, closing and opening again QGIS will do the configuration automatically.<br>More information at: {carto_link}").format(
+            link=f"<a href = '{link}'>{link}</a>", path=path, carto_link=f"<a href = '{carto_link}'>{carto_link}</a>")
+        self.logger.error(error)
+        self.ssl_error.emit(error, translate_error)
+        self.result = False
+        return error
+
+
     def run(self):
         """
             Download the file to the designated location and indicates its progress.
@@ -68,11 +88,7 @@ class DownloadTask(QgsTask):
             self.logger.info("Download completed.")
             return True
         except requests.exceptions.SSLError as e:
-            error="SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually."
-            translate_error = tr("SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually. More information at:{path}").format(path = "<a href = 'https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/'>https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/</a>")
-            self.logger.error(error)
-            self.ssl_error.emit(error, translate_error)
-            self.result = False
+            error = self.ssl_error_response()
             raise RuntimeError(error) from e
         except Exception as e:
             self.logger.error("An error happened: " + str(e))

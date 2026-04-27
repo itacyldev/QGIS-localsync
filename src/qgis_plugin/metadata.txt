@@ -29,9 +29,11 @@ about=
     - <b>Generic folder synchronization:</b> can synchronize any folder between the device and PC, beyond CartoDruid-specific data.
     This plugin enables teams to synchronize field data locally, without relying on cloud services.
 
-    External dependencies: The plugin uses the ADB binary. You can download and install the binary using a button in the plugin configuration. Further information can be found in the documentation in the readme or at <a href="https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/">https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/</a>.
+    External dependencies: The plugin uses the <b>ADB binary</b>. You can download and install the binary using a button in the plugin configuration. <b>Further information</b> can be found in the documentation in the readme or at <a href="https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/">https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/</a>.
 
-tracker=https://github.com/itacyldev/QGIS-localsync/issues
+    <b>Download CartoDruid</b> from <a href="https://play.google.com/store/apps/details?id=es.jcyl.ita.crtdrd">https://play.google.com/store/apps/details?id=es.jcyl.ita.crtdrd</a>!
+
+tracker=https://foro.cartodruid.es/c/qgis-plugin/soporte-qgis-plugin/13
 repository=https://github.com/itacyldev/QGIS-localsync
 # End of mandatory metadata
 
