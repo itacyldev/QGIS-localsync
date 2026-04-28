@@ -379,14 +379,14 @@ Esto abrirá el menú de configuración del proyecto para que puedas seleccionar
         <translation>Asegúrate de que tu teléfono está correctamente conectado al ordenador y el &lt;b&gt;modo de depuración ADB&lt;/b&gt; está activado. Más información en:&lt;br&gt;{link}</translation>
     </message>
     <message>
-        <location filename="../tasks/download_task.py" line="78"/>
-        <source>SSL certificate error.</source>
-        <translation>Error de certificado SSL.</translation>
+        <location filename="../tasks/download_task.py" line="57"/>
+        <source>An error has occurred during the download, you will need to download the ADB manually.&lt;br&gt; Download the file from:&lt;br&gt;{link}&lt;br&gt;&lt;br&gt; Unzip it and copy the contents to:&lt;br&gt;{path}.&lt;br&gt;&lt;br&gt;You will have to configure the {adb} path with the {adb} found inside the zip in the plugin configuration window.&lt;br&gt;More information at: {carto_link}</source>
+        <translation>Ha ocurrido un error durante la descarga, necesitarás descargar ADB manualmente.&lt;br&gt; Descarga el fichero desde:&lt;br&gt;{link}&lt;br&gt;&lt;br&gt; Descomprímelo y copia sus contenidos en:&lt;br&gt;{path}&lt;br&gt;&lt;br&gt;Tendrás que configurar la ruta a {adb} en la ventana de configuración del plugin con la ruta al archivo {adb} encontrado en el zip que acabas de descomprimir.&lt;br&gt;Más información en: {carto_link}</translation>
     </message>
     <message>
-        <location filename="../tasks/download_task.py" line="55"/>
-        <source>SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually.&lt;br&gt; Download the file from:&lt;br&gt;{link}&lt;br&gt;&lt;br&gt; Unzip it and copy the contents to:&lt;br&gt;{path}.&lt;br&gt;&lt;br&gt;You will have to configure the adb binary path with the adb binary found inside the zip in the plugin configuration window.&lt;br&gt;If you copied and unziped the file in the correct path, closing and opening again QGIS will do the configuration automatically.&lt;br&gt;More information at: {carto_link}</source>
-        <translation >La verificación del certificado SSL ha fallado. Si estás tras un proxy corporativo, tendrás que descargar y configurar ADB manualmente.&lt;br&gt; Descarga el archivo desde:&lt;br&gt;{link}&lt;br&gt;&lt;br&gt; Descomprímelo y copia sus contenidos en: &lt;br&gt;{path}&lt;br&gt;&lt;br&gt;Tendrás que configurar la ruta del binario ADB de la configuración del plugin con el binario encontrado en los archivos descargados.&lt;br&gt;Si has descomprimido y copiado el archivo en la ruta correcta, entonces al cerrar y abrir QGIS la configuración se hará de forma automática.&lt;br&gt;Más información en: {carto_link}</translation>
+        <location filename="../dialog/localsync_conf_panel.py" line="227"/>
+        <source>Download ADB error</source>
+        <translation>Error en la descarga de ADB</translation>
     </message>
 </context>
 <context>

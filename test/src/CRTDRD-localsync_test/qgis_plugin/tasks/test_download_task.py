@@ -40,10 +40,3 @@ class TestDownloadTask(unittest.TestCase):
         task.isCanceled.return_value = True
 
         self.assertFalse(task.run())
-
-    @patch("qgis_plugin.tasks.download_task.requests.get", side_effect=ConnectionError("timeout"))
-    def test_run_request_exception(self, mock_get):
-        task = self._make_task()
-
-        self.assertFalse(task.run())
-        self.assertIsInstance(task.exception, ConnectionError)

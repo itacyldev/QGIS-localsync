@@ -203,7 +203,7 @@ class LocalsyncConfPanel(QtWidgets.QDialog, FORM_CLASS):
                         adb_download_env = LINUX_ADB_DOWNLOAD_URL
                 self.d_task = DownloadTask(adb_download_env,
                                            adb_path)
-                self.d_task.ssl_error.connect(self.ssl_error)
+                self.d_task.download_adb_error.connect(self.download_adb_error)
                 self.logger.info("Starting download of adb binary.")
                 self.d_task.taskCompleted.connect(self._download_completed)
                 self.d_task.taskTerminated.connect(self._download_terminated)
@@ -215,16 +215,16 @@ class LocalsyncConfPanel(QtWidgets.QDialog, FORM_CLASS):
             self.logger.info("There is already a download task. Aborting download.")
 
 
-    def ssl_error(self, text:str, translated_text:str):
+    def download_adb_error(self, text:str, translated_text:str):
         """
             Show an error to the user showing possible alternatives. Used for download_task if there is some SSL
             problem.
             :param text: text to show.
             :param translated_text: translated text to show.
         """
-        self.d_task.ssl_error.disconnect(self.ssl_error)
+        self.d_task.download_adb_error.disconnect(self.download_adb_error)
         self.logger.error(text)
-        QMessageBox.critical(None, tr("SSL certificate error."), translated_text)
+        QMessageBox.critical(None, tr("Download ADB error"), translated_text)
 
 
     def _download_terminated(self):

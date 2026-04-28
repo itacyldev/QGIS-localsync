@@ -23,7 +23,7 @@ class DownloadTask(QgsTask):
         :ivar result: True if there is a result, False otherwise.
         :vartype result: bool
     """
-    ssl_error = pyqtSignal(str, str)
+    download_adb_error = pyqtSignal(str, str)
 
 
 
@@ -44,20 +44,21 @@ class DownloadTask(QgsTask):
         self.result = False
 
 
-    def ssl_error_response(self):
+    def error_response(self):
         op_sys = platform.system()
         link = WINDOWS_ADB_DOWNLOAD_URL
         path = Path(self.output_path).parent.as_posix()
         carto_link = "https://docs.cartodruid.es/es/latest/qgisPlugin/qgis_plugin/"
+        adb = "adb.exe"
         if op_sys == "Linux":
             link = LINUX_ADB_DOWNLOAD_URL
-        error = "SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually."
-        translate_error = tr("SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually.<br> Download the file from:<br>{link}<br><br> Unzip it and copy the contents to:<br>{path}.<br><br>You will have to configure the adb binary path with the adb binary found inside the zip in the plugin configuration window.<br>If you copied and unziped the file in the correct path, closing and opening again QGIS will do the configuration automatically.<br>More information at: {carto_link}").format(
-            link=f"<a href = '{link}'>{link}</a>", path=path, carto_link=f"<a href = '{carto_link}'>{carto_link}</a>")
+            adb = "adb"
+        error = "An error has occurred during the download, you will need to download the ADB manually."
+        translate_error = tr("An error has occurred during the download, you will need to download the ADB manually.<br> Download the file from:<br>{link}<br><br> Unzip it and copy the contents to:<br>{path}.<br><br>You will have to configure the {adb} path with the {adb} found inside the zip in the plugin configuration window.<br>More information at: {carto_link}").format(
+            link=f"<a href = '{link}'>{link}</a>", path=path, carto_link=f"<a href = '{carto_link}'>{carto_link}</a>", adb = adb)
         self.logger.error(error)
-        self.ssl_error.emit(error, translate_error)
+        self.download_adb_error.emit(error, translate_error)
         self.result = False
-        return error
 
 
     def run(self):
@@ -87,11 +88,9 @@ class DownloadTask(QgsTask):
             self.result = True
             self.logger.info("Download completed.")
             return True
-        except requests.exceptions.SSLError as e:
-            error = self.ssl_error_response()
-            raise RuntimeError(error) from e
         except Exception as e:
             self.logger.error("An error happened: " + str(e))
+            self.error_response()
             self.exception = e
             self.result = False
             return False

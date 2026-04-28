@@ -304,17 +304,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="322"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="319"/>
         <source>The Photo layers configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed. Check if there are duplicates, this configuration does not allow to duplicate values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="334"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="331"/>
         <source>The Photo layers configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="362"/>
+        <location filename="../dialog/localsync_conf_panel.py" line="359"/>
         <source>The Synchronization configuration json provided is malformed. Press cancel if you want to reset the configuration state or use a configuration that is not malformed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,13 +374,13 @@ This will open the project configuration menu, so you can select what do you wan
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialog/localsync_conf_panel.py" line="230"/>
-        <source>SSL certificate error.</source>
+        <location filename="../tasks/download_task.py" line="57"/>
+        <source>An error has occurred during the download, you will need to download the ADB manually.&lt;br&gt; Download the file from:&lt;br&gt;{link}&lt;br&gt;&lt;br&gt; Unzip it and copy the contents to:&lt;br&gt;{path}.&lt;br&gt;&lt;br&gt;You will have to configure the {adb} path with the {adb} found inside the zip in the plugin configuration window.&lt;br&gt;More information at: {carto_link}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tasks/download_task.py" line="55"/>
-        <source>SSL certificate verification failed. If you are behind a corporate proxy, you will have to download and configura adb manually.&lt;br&gt; Download the file from:&lt;br&gt;{link}&lt;br&gt;&lt;br&gt; Unzip it and copy the contents to:&lt;br&gt;{path}.&lt;br&gt;&lt;br&gt;You will have to configure the adb binary path with the adb binary found inside the zip in the plugin configuration window.&lt;br&gt;If you copied and unziped the file in the correct path, closing and opening again QGIS will do the configuration automatically.&lt;br&gt;More information at: {carto_link}</source>
+        <location filename="../dialog/localsync_conf_panel.py" line="227"/>
+        <source>Download ADB error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

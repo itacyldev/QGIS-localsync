@@ -6,7 +6,7 @@
 name=CartoDruid Device Sync
 qgisMinimumVersion=3.28
 description=Synchronize projects between CartoDruid and QGIS. Configurable for other device files.
-version=0.3
+version=0.3.2
 author=ITACYL
 email=palferfr@itacyl.es
 
